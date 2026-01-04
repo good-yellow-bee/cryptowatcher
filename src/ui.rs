@@ -10,20 +10,20 @@ use ratatui::{
 use crate::app::{App, CoinData};
 
 // Synthwave color palette
-const PINK: Color = Color::Rgb(255, 46, 151);         // #ff2e97
-const CYAN: Color = Color::Rgb(0, 240, 255);          // #00f0ff
-const POSITIVE: Color = Color::Rgb(57, 255, 20);      // #39ff14
-const BORDER: Color = Color::Rgb(61, 26, 120);        // #3d1a78
-const MUTED: Color = Color::Rgb(107, 91, 149);        // #6b5b95
-const TEXT: Color = Color::Rgb(240, 240, 240);        // #f0f0f0
+const PINK: Color = Color::Rgb(255, 46, 151); // #ff2e97
+const CYAN: Color = Color::Rgb(0, 240, 255); // #00f0ff
+const POSITIVE: Color = Color::Rgb(57, 255, 20); // #39ff14
+const BORDER: Color = Color::Rgb(61, 26, 120); // #3d1a78
+const MUTED: Color = Color::Rgb(107, 91, 149); // #6b5b95
+const TEXT: Color = Color::Rgb(240, 240, 240); // #f0f0f0
 
 const CHART_COLORS: [Color; 6] = [
-    Color::Rgb(255, 46, 151),  // Hot pink
-    Color::Rgb(0, 240, 255),   // Cyan
-    Color::Rgb(157, 78, 221),  // Purple
-    Color::Rgb(247, 37, 133),  // Magenta
-    Color::Rgb(76, 201, 240),  // Light blue
-    Color::Rgb(114, 9, 183),   // Deep violet
+    Color::Rgb(255, 46, 151), // Hot pink
+    Color::Rgb(0, 240, 255),  // Cyan
+    Color::Rgb(157, 78, 221), // Purple
+    Color::Rgb(247, 37, 133), // Magenta
+    Color::Rgb(76, 201, 240), // Light blue
+    Color::Rgb(114, 9, 183),  // Deep violet
 ];
 
 pub fn render(frame: &mut Frame, app: &App) {
@@ -37,7 +37,13 @@ pub fn render(frame: &mut Frame, app: &App) {
 
     let chunks = Layout::vertical(constraints).split(area);
 
-    for (i, coin) in app.coins.iter().skip(app.scroll_offset).take(visible_coins).enumerate() {
+    for (i, coin) in app
+        .coins
+        .iter()
+        .skip(app.scroll_offset)
+        .take(visible_coins)
+        .enumerate()
+    {
         render_coin_chart(frame, chunks[i], coin, CHART_COLORS[i % CHART_COLORS.len()]);
     }
 
@@ -74,7 +80,11 @@ fn render_coin_chart(frame: &mut Frame, area: Rect, coin: &CoinData, color: Colo
         ),
         Span::styled(" │ ", Style::default().fg(BORDER)),
         Span::styled(
-            format!("H:{} L:{}", format_price_short(coin.high_24h), format_price_short(coin.low_24h)),
+            format!(
+                "H:{} L:{}",
+                format_price_short(coin.high_24h),
+                format_price_short(coin.low_24h)
+            ),
             Style::default().fg(MUTED),
         ),
         Span::styled(" │ ", Style::default().fg(BORDER)),
