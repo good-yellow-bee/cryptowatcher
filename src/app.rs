@@ -70,7 +70,11 @@ impl CoinData {
 
     pub fn time_labels(&self) -> Vec<String> {
         if self.price_history.is_empty() {
-            return vec!["--:--".to_string(), "--:--".to_string(), "--:--".to_string()];
+            return vec![
+                "--:--".to_string(),
+                "--:--".to_string(),
+                "--:--".to_string(),
+            ];
         }
 
         let format_time = |ts_ms: i64| -> String {
@@ -124,7 +128,8 @@ impl App {
             match client.get_klines(&coin.symbol, MAX_HISTORY as u32).await {
                 Ok(data) => coin.load_history(data),
                 Err(e) => {
-                    self.status_message = format!("Error loading history for {}: {}", coin.symbol, e);
+                    self.status_message =
+                        format!("Error loading history for {}: {}", coin.symbol, e);
                 }
             }
         }
