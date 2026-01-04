@@ -80,7 +80,7 @@ impl BinanceClient {
         let prices: Vec<(i64, f64)> = data
             .iter()
             .filter_map(|kline| {
-                let ts = kline.get(0).and_then(|v| v.as_i64())?;
+                let ts = kline.first().and_then(|v| v.as_i64())?;
                 let price = kline
                     .get(4)
                     .and_then(|v| v.as_str())
