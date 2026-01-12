@@ -11,6 +11,7 @@ pub enum AppEvent {
     Key(KeyEvent),
     Tick,
     Quit,
+    Resize,
 }
 
 pub struct EventHandler {
@@ -45,6 +46,11 @@ impl EventHandler {
                                     break;
                                 }
                                 if tx_clone.send(AppEvent::Key(key)).is_err() {
+                                    break;
+                                }
+                            }
+                            Some(Ok(Event::Resize(_, _))) => {
+                                if tx_clone.send(AppEvent::Resize).is_err() {
                                     break;
                                 }
                             }

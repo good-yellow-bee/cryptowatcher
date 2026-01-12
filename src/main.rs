@@ -102,6 +102,7 @@ async fn run<B: Backend>(
                 _ => {}
             },
             AppEvent::Quit => app.quit(),
+            AppEvent::Resize => {}
         }
 
         if !app.running {
