@@ -40,7 +40,12 @@ pub fn render(frame: &mut Frame, app: &App) {
     let grid_areas = calculate_grid_layout(visible.len(), main_area);
 
     for (i, (coin, chart_area)) in visible.iter().zip(grid_areas.iter()).enumerate() {
-        render_coin_chart(frame, *chart_area, coin, CHART_COLORS[i % CHART_COLORS.len()]);
+        render_coin_chart(
+            frame,
+            *chart_area,
+            coin,
+            CHART_COLORS[i % CHART_COLORS.len()],
+        );
     }
 
     render_status_bar(frame, main_chunks[1], app);
